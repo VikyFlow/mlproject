@@ -23,10 +23,10 @@ from src.logger import logging
 
 from src.utils import save_object
 
-#give input to the datat transformatio
+#give input to the data transformation
 @dataclass
 class DataTransformationConfig:
-    preprocessor_obj_file_path = os.path.join('artifacts',"proprocessor.pk1")
+    preprocessor_obj_file_path = os.path.join('artifacts',"proprocessor.pkl")
 
 class DataTransformation:
     def __init__(self):
@@ -79,20 +79,14 @@ class DataTransformation:
                 [
                     ("num_pipeline",num_pipeline,numerical_columns),
                     ("cat_pipeline",cat_pipeline,categorical_columns)
-
-
                 ]
             )
             return preprocessor
-
-
-
 
         except Exception as e:
             raise CustomException(e,sys)
         
     def initiate_data_transformation(self,train_path,test_path):
-
         try:
             train_df=pd.read_csv(train_path)
             test_df=pd.read_csv(test_path)
